@@ -1,0 +1,43 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "npm",
+			"script": "watch",
+			"label": "npm: watch",
+			"detail": "rollup -c rollup.config.ts --configPlugin typescript --watch",
+			"problemMatcher": {
+				"base": "$tsc",
+				"background": {
+					"activeOnStart": true,
+					"beginsPattern": "rollup\\s",
+					"endsPattern": "waiting for changes\\.\\.\\."
+				}
+			},
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"isBackground": true
+		},
+		{
+			"type": "npm",
+			"script": "watch-tests",
+			"problemMatcher": "$tsc-watch",
+			"isBackground": true,
+			"presentation": {
+				"reveal": "never",
+				"group": "watchers"
+			},
+			"group": "build"
+		},
+		{
+			"label": "tasks: watch-tests",
+			"dependsOn": [
+				"npm: watch",
+				"npm: watch-tests"
+			],
+			"problemMatcher": []
+		}
+	]
+}

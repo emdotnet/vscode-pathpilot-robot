@@ -1,0 +1,100 @@
+{
+  "name": "pathpilot-robot",
+  "displayName": "PathPilot Robot",
+  "description": "Tormach PathPilot Robot Visual Studio Code extension for developing TRPL programs",
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tormach/vscode-pathpilot-robot.git"
+  },
+  "bugs": {
+    "url": "https://github.com/tormach/vscode-pathpilot-robot/issues"
+  },
+  "homepage": "https://github.com/tormach/vscode-pathpilot-robot/blob/main/README.md",
+  "publisher": "tormach",
+  "author": {
+    "name": "Jakub Fišer"
+  },
+  "engines": {
+    "vscode": "^1.69.0"
+  },
+  "icon": "resources/pathpilot.png",
+  "categories": [
+    "Other"
+  ],
+  "license": "SEE LICENSE IN LICENSE.md",
+  "preview": true,
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "pathpilot-robot.connectToRunningRobotContainer",
+        "title": "Connect to running robot",
+        "category": "PathPilot Robot"
+      },
+      {
+        "command": "pathpilot-robot.launchPathPilotRobot",
+        "title": "Launch PathPilot Robot",
+        "category": "PathPilot Robot"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "pathpilot-robot.connectToRunningRobotContainer",
+        "key": "ctrl+shift+r",
+        "when": "tormachContext.outsideRobotEnvironment"
+      }
+    ],
+    "menus": {
+      "commandPalette": [
+        {
+          "command": "pathpilot-robot.connectToRunningRobotContainer",
+          "when": "tormachContext.outsideRobotEnvironment"
+        },
+        {
+          "command": "pathpilot-robot.launchPathPilotRobot",
+          "when": "tormachContext.outsideRobotEnvironment"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run package",
+    "compile": "rollup -c rollup.config.ts --configPlugin typescript",
+    "watch": "rollup -c rollup.config.ts --configPlugin typescript --watch",
+    "package": "rm -rf dist && tsc --module commonjs && rollup -c rollup.config.ts --configPlugin typescript",
+    "compile-tests": "tsc -p . --outDir out",
+    "watch-tests": "tsc -p . -w --outDir out",
+    "pretest": "npm run compile-tests && npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^22.0.1",
+    "@rollup/plugin-json": "^4.1.0",
+    "@rollup/plugin-node-resolve": "^13.3.0",
+    "@rollup/plugin-typescript": "^8.3.4",
+    "@types/glob": "^7.2.0",
+    "@types/mocha": "^9.1.1",
+    "@types/node": "16.x",
+    "@types/vscode": "^1.69.0",
+    "@types/dockerode": "^3.3.9",
+    "@typescript-eslint/eslint-plugin": "^5.31.0",
+    "@typescript-eslint/parser": "^5.31.0",
+    "@vscode/test-electron": "^2.1.5",
+    "eslint": "^8.20.0",
+    "glob": "^8.0.3",
+    "mocha": "^10.0.0",
+    "rollup": "^2.77.2",
+    "rollup-plugin-terser": "^7.0.2",
+    "ts-loader": "^9.3.1",
+    "typescript": "^4.7.4"
+  },
+  "dependencies": {
+    "dockerode": "^3.3.3"
+  },
+  "extensionDependencies": []
+}
