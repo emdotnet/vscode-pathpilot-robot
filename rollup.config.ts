@@ -22,10 +22,17 @@ export default defineConfig({
         'vscode'
     ],
     plugins: [
-        nodeResolve({preferBuiltins : false}),
-        json(),
         typescript(),
-        //commonjs(),
+        json(),
+        nodeResolve({
+            preferBuiltins : false,
+        }),
+// Until Rollup can handle the default '.node' binary files, do not use commonjs
+// plugin (and do not package the extension using Rollup)
+//        commonjs({
+//            include: /node_modules/,
+//            requireReturnsDefault: true,
+//        }),
         terser({
             compress: {
                 module: true,
