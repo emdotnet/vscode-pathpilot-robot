@@ -26,7 +26,7 @@ export function activate(context: vscode.ExtensionContext) {
 
 
 	context.subscriptions.push(vscode.commands.registerCommand('pathpilot-robot.launchPathPilotRobot', async () => {
-		vscode.window.showInformationMessage('Launching PathPilot Robot!');
+		vscode.window.showInformationMessage('Starting PathPilot Robot Launcher!');
 
 		try {
 			if (extensionEnvironment.extensionKind !== RuntimeExtensionKind.local) {
