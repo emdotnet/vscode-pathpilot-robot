@@ -3,8 +3,8 @@
 	"tasks": [
 		{
 			"type": "npm",
-			"script": "watch",
-			"label": "npm: watch",
+			"script": "watch-rollup",
+			"label": "npm: watch-rollup",
 			"detail": "rollup -c rollup.config.ts --configPlugin typescript --watch",
 			"problemMatcher": {
 				"base": "$tsc",
@@ -17,6 +17,25 @@
 			"group": {
 				"kind": "build",
 				"isDefault": true
+			},
+			"isBackground": true
+		},
+		{
+			"type": "npm",
+			"script": "watch-esbuild",
+			"label": "npm: watch-esbuild",
+			"detail": "esrun --watch=src/*.* --preserveConsole esbuild.config.ts",
+			"problemMatcher": {
+				"base": "$tsc",
+				"background": {
+					"activeOnStart": true,
+					"beginsPattern": "esrun\\s",
+					"endsPattern": "ESBuild run finished\\."
+				}
+			},
+			"group": {
+				"kind": "build",
+				"isDefault": false
 			},
 			"isBackground": true
 		},
@@ -38,6 +57,6 @@
 				"npm: watch-tests"
 			],
 			"problemMatcher": []
-		}
+		},
 	]
 }

@@ -62,10 +62,13 @@
     }
   },
   "scripts": {
-    "vscode:prepublish": "npm run package",
-    "compile": "rollup -c rollup.config.ts --configPlugin typescript",
-    "watch": "rollup -c rollup.config.ts --configPlugin typescript --watch",
-    "package": "rm -rf dist && rollup -c rollup.config.ts --configPlugin typescript",
+    "vscode:prepublish": "npm run package-esbuild",
+    "compile-esbuild":"esrun esbuild.config.ts",
+    "package-esbuild":"rm -rf dist && npm run compile-esbuild -- --minify",
+    "watch-esbuild":"esrun --watch=src/*.* --preserveConsole esbuild.config.ts",
+    "compile-rollup": "rollup -c rollup.config.ts --configPlugin typescript",
+    "package-rollup": "rm -rf dist && npm run compile-rollup",
+    "watch-rollup": "npm run compile-rollup --watch",
     "compile-tests": "tsc -p . --outDir out",
     "watch-tests": "tsc -p . -w --outDir out",
     "pretest": "npm run compile-tests && npm run compile && npm run lint",
@@ -73,6 +76,7 @@
     "test": "node ./out/test/runTest.js"
   },
   "devDependencies": {
+    "@digitak/esrun": "^3.2.19",
     "@rollup/plugin-commonjs": "^22.0.2",
     "@rollup/plugin-json": "^4.1.0",
     "@rollup/plugin-node-resolve": "^13.3.0",
@@ -87,6 +91,7 @@
     "@typescript-eslint/eslint-plugin": "^5.51.0",
     "@typescript-eslint/parser": "^5.51.0",
     "@vscode/test-electron": "^2.2.3",
+    "esbuild": "^0.17.7",
     "eslint": "^8.34.0",
     "glob": "^8.1.0",
     "mocha": "^10.2.0",

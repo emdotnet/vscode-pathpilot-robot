@@ -6,6 +6,7 @@ src/**
 .gitignore
 .yarnrc
 rollup.config.ts
+esbuild.config.ts
 vsc-extension-quickstart.md
 **/tsconfig.json
 **/.eslintrc.json
